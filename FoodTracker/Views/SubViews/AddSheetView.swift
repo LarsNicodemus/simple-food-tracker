@@ -11,13 +11,21 @@ struct AddSheetView: View {
     @Binding var showSheet: Bool
     @State var titleTextInput: String = ""
     @State var caloriesTextInput: String = ""
+    @State var servingSizeInput: String = "1 Portion"
+    @State var quantityInput: String = "1"
+    @State private var types: category = .meal
+    @State private var healthRating: HealthRating = .green
+    @State private var mealTime: MealTime = .lunch
+
     @Binding var mealEntries: [Entry]
     @Binding var drinkEntries: [Entry]
     @Binding var sweetsEntries: [Entry]
     @Binding var fruitEntries: [Entry]
-    @State private var types: category = .meal
+    
+    @State private var showError = false
+
     var body: some View {
-        Button("new Entry") {
+        Button("Neuer Eintrag") {
             showSheet = true
         }
         .padding()
@@ -28,47 +36,97 @@ struct AddSheetView: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color("lightOrange"), lineWidth: 1)
         )
-
         .sheet(isPresented: $showSheet) {
             ZStack {
-                
-                VStack{
+                VStack {
                     Form {
-                        Section("name") {
-                            TextField("type here..", text: $titleTextInput)
-                                .foregroundStyle(Color("mint"))
-                                
-                        }
-                        Section("type") {
-                            Picker("Select a Type", selection: $types) {
-                                ForEach(category.allCases) { type in
-                                    Text(type.rawValue).tag(type)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-
-                        }
-                        Section("calories") {
-                            TextField("type here..", text: $caloriesTextInput)
-                                .foregroundStyle(Color("mint"))
+                        Section("Name") {
+                            TextField("Hier eingeben...", text: $titleTextInput)
+                                .foregroundColor(Color("mint"))
                         }
                         
+                        Section("Typ") {
+                            Picker("Typ auswählen", selection: $types) {
+                                ForEach(category.allCases, id: \.self) { type in
+                                    Text(type.rawValue.capitalized).tag(type)
+                                }
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
+                        
+                        Section("Kalorien") {
+                            TextField("Kalorienzahl", text: $caloriesTextInput)
+                                .keyboardType(.numberPad)
+                                .foregroundColor(Color("mint"))
+                        }
+                        
+                        Section("Portionsgröße") {
+                            TextField("Portionsgröße", text: $servingSizeInput)
+                                .foregroundColor(Color("mint"))
+                        }
+                        
+                        Section("Menge") {
+                            TextField("Menge", text: $quantityInput)
+                                .keyboardType(.numberPad)
+                                .foregroundColor(Color("mint"))
+                        }
+                        
+                        Section("Health Rating") {
+                            Picker("Bewertung", selection: $healthRating) {
+                                Text("Grün").tag(HealthRating.green)
+                                Text("Gelb").tag(HealthRating.yellow)
+                                Text("Rot").tag(HealthRating.red)
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
+                        
+                        Section("Mahlzeit") {
+                            Picker("Mahlzeit", selection: $mealTime) {
+                                ForEach(MealTime.allCases, id: \.self) { time in
+                                    Text(time.rawValue.capitalized).tag(time)
+                                }
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
                     }
                     Spacer().frame(height: 16)
-                    Button("Save entry"){
-                        switch types {
-                        case .meal: mealEntries.append(Entry(id: String(mealEntries.count + 1), title: titleTextInput, calories: Int(caloriesTextInput) ?? 0, type: types))
-                        case .drink: drinkEntries.append(Entry(id: String(mealEntries.count + 1), title: titleTextInput, calories: Int(caloriesTextInput) ?? 0, type: types))
-                        case .sweet: sweetsEntries.append(Entry(id: String(mealEntries.count + 1), title: titleTextInput, calories: Int(caloriesTextInput) ?? 0, type: types))
-                        case .fruit: fruitEntries.append(Entry(id: String(mealEntries.count + 1), title: titleTextInput, calories: Int(caloriesTextInput) ?? 0, type: types))
+                    
+                    Button("Eintrag speichern") {
+                        if let calories = Int(caloriesTextInput),
+                           let quantity = Int(quantityInput),
+                           !titleTextInput.isEmpty {
+                            let newEntry = Entry(
+                                id: UUID().uuidString,
+                                title: titleTextInput,
+                                calories: calories,
+                                type: types,
+                                servingSize: servingSizeInput,
+                                quantity: quantity,
+                                healthRating: healthRating,
+                                mealTime: mealTime
+                            )
+                            
+                            switch types {
+                            case .meal:
+                                mealEntries.append(newEntry)
+                            case .drink:
+                                drinkEntries.append(newEntry)
+                            case .sweet:
+                                sweetsEntries.append(newEntry)
+                            case .fruit:
+                                fruitEntries.append(newEntry)
+                            }
+                            showSheet = false
+                        } else {
+                            showError = true
                         }
-                        showSheet = false
+                    }
+                    .alert(isPresented: $showError) {
+                        Alert(title: Text("Fehler"), message: Text("Bitte alle Felder korrekt ausfüllen"), dismissButton: .default(Text("OK")))
                     }
                 }
-                
-                
+                .presentationDetents([.medium, .large])
             }
-            .presentationDetents([.medium, .large])
         }
     }
 }

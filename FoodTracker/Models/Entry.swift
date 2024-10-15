@@ -14,4 +14,9 @@ struct Entry: Identifiable {
     var date = Date()
     var calories: Int
     var type: category
+    var servingSize: String = "1 Portion"
+    var quantity: Int = 1
+    var healthRating: HealthRating = .green
+    var mealTime: MealTime = .lunch
+
 }
