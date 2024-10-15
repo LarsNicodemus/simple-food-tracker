@@ -11,10 +11,12 @@
 		CE75F20B2C8B1460001AD0A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F20A2C8B1460001AD0A3 /* ContentView.swift */; };
 		CE75F20D2C8B1462001AD0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F20C2C8B1462001AD0A3 /* Assets.xcassets */; };
 		CE75F2102C8B1462001AD0A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F20F2C8B1462001AD0A3 /* Preview Assets.xcassets */; };
+		EE0504612CBE72D7005BB78E /* AddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0504602CBE72D7005BB78E /* AddSheetView.swift */; };
 		EE9AFC852CBD140500A7BBF2 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFC842CBD13F700A7BBF2 /* Entry.swift */; };
 		EE9AFC882CBD14A800A7BBF2 /* EntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFC872CBD14A800A7BBF2 /* EntryListView.swift */; };
 		EE9AFCC92CBD27B200A7BBF2 /* EntryListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */; };
 		EE9AFCCD2CBD326100A7BBF2 /* EntryListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCCC2CBD326100A7BBF2 /* EntryListSectionView.swift */; };
+		EE9AFCD62CBE4B3600A7BBF2 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCD52CBE4B3200A7BBF2 /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,10 +25,12 @@
 		CE75F20A2C8B1460001AD0A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE75F20C2C8B1462001AD0A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE75F20F2C8B1462001AD0A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EE0504602CBE72D7005BB78E /* AddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSheetView.swift; sourceTree = "<group>"; };
 		EE9AFC842CBD13F700A7BBF2 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		EE9AFC872CBD14A800A7BBF2 /* EntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListView.swift; sourceTree = "<group>"; };
 		EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListRowView.swift; sourceTree = "<group>"; };
 		EE9AFCCC2CBD326100A7BBF2 /* EntryListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListSectionView.swift; sourceTree = "<group>"; };
+		EE9AFCD52CBE4B3200A7BBF2 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 		CE75F2072C8B1460001AD0A3 /* FoodTracker */ = {
 			isa = PBXGroup;
 			children = (
+				EE9AFCD42CBE4B2100A7BBF2 /* Utils */,
 				EE9AFC862CBD149200A7BBF2 /* Views */,
 				EE9AFC832CBD13EF00A7BBF2 /* Models */,
 				CE75F2082C8B1460001AD0A3 /* FoodTrackerApp.swift */,
@@ -99,8 +104,17 @@
 			children = (
 				EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */,
 				EE9AFCCC2CBD326100A7BBF2 /* EntryListSectionView.swift */,
+				EE0504602CBE72D7005BB78E /* AddSheetView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		EE9AFCD42CBE4B2100A7BBF2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EE9AFCD52CBE4B3200A7BBF2 /* Enums.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,8 +189,10 @@
 			files = (
 				EE9AFC852CBD140500A7BBF2 /* Entry.swift in Sources */,
 				CE75F20B2C8B1460001AD0A3 /* ContentView.swift in Sources */,
+				EE0504612CBE72D7005BB78E /* AddSheetView.swift in Sources */,
 				CE75F2092C8B1460001AD0A3 /* FoodTrackerApp.swift in Sources */,
 				EE9AFC882CBD14A800A7BBF2 /* EntryListView.swift in Sources */,
+				EE9AFCD62CBE4B3600A7BBF2 /* Enums.swift in Sources */,
 				EE9AFCC92CBD27B200A7BBF2 /* EntryListRowView.swift in Sources */,
 				EE9AFCCD2CBD326100A7BBF2 /* EntryListSectionView.swift in Sources */,
 			);

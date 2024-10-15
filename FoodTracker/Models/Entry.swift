@@ -8,8 +8,10 @@
 import Foundation
 
 struct Entry: Identifiable {
+    
     var id: String
     var title: String
     var date = Date()
     var calories: Int
+    var type: category
 }
