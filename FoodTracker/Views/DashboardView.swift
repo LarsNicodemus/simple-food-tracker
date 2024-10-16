@@ -9,21 +9,25 @@ import SwiftUI
 
 struct DashboardView: View {
     
+    @Binding var meals:[Entry]
+    @Binding var drinks:[Entry]
+    @Binding var sweets:[Entry]
+    @Binding var fruits:[Entry]
     
     
     
     
-    var mealCalories: Int = 950
-    var drinkCalories: Int = 150
-    var sweetsCalories: Int = 500
-    var fruitCalories: Int = 200
-
-    var totalCalories: Int {
-        mealCalories + drinkCalories + sweetsCalories + fruitCalories
-    }
 
     var body: some View {
-        NavigationStack {
+        let mealCalories: Int = addCalories(entries: meals)
+        let drinkCalories: Int = addCalories(entries: drinks)
+        let sweetsCalories: Int = addCalories(entries: sweets)
+        let fruitCalories: Int = addCalories(entries: fruits)
+
+        var totalCalories: Int {
+            mealCalories + drinkCalories + sweetsCalories + fruitCalories
+        }
+        
             VStack(spacing: 20) {
                 Text("Dashboard")
                     .font(.largeTitle)
@@ -39,10 +43,10 @@ struct DashboardView: View {
                         .font(
                             .system(size: 48, weight: .bold, design: .rounded)
                         )
-                        .foregroundColor(.orange)
+                        .foregroundColor(Color("lightOrange"))
                 }
                 .padding()
-                .background(Color.orange.opacity(0.1))
+                .background(Color("lightOrange").opacity(0.1))
                 .cornerRadius(12)
 
                 HStack(spacing: 20) {
@@ -66,9 +70,17 @@ struct DashboardView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Kalorienübersicht")
-        }
+            
+        
     }
+}
+
+func addCalories(entries: [Entry])-> Int{
+    var calories: Int = 0
+    for entry in entries {
+            calories += entry.calories
+        }
+        return calories
 }
 
 func colorPick(
@@ -157,12 +169,72 @@ struct CalorieCategoryView: View {
                 .padding(.top, 10)
         }
         .padding()
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color.gray.opacity(0.1))
         .cornerRadius(12)
         .shadow(radius: 5)
     }
 }
 
 #Preview {
-    DashboardView()
+    DashboardView(
+        meals: .constant([
+            Entry(
+                id: "1", title: "Tuna Maki Sushi", date: Date(), calories: 173,
+                type: .meal, healthRating: .yellow),
+            Entry(
+                id: "2", title: "Chicken Caesar Salad", date: Date(), calories: 350,
+                type: .meal, healthRating: .yellow),
+            Entry(
+                id: "3", title: "Vegetable Lasagna", date: Date(), calories: 420,
+                type: .meal, healthRating: .green),
+            Entry(
+                id: "4", title: "Grilled Salmon with Asparagus", date: Date(),
+                calories: 380, type: .meal, healthRating: .green),
+        ]),
+
+        drinks: .constant([
+            Entry(
+                id: "1", title: "Coffee (black)", date: Date(), calories: 2,
+                type: .drink, healthRating: .green),
+            Entry(
+                id: "2", title: "Orange Juice", date: Date(), calories: 112,
+                type: .drink, healthRating: .yellow),
+            Entry(
+                id: "3", title: "Green Tea", date: Date(), calories: 0,
+                type: .drink, healthRating: .green),
+            Entry(
+                id: "4", title: "Latte", date: Date(), calories: 190, type: .drink,
+                healthRating: .red),
+        ]),
+
+        sweets: .constant([
+            Entry(
+                id: "1", title: "Chocolate Chip Cookie", date: Date(),
+                calories: 150, type: .sweet, healthRating: .red),
+            Entry(
+                id: "2", title: "Strawberry Ice Cream", date: Date(), calories: 207,
+                type: .sweet, healthRating: .red),
+            Entry(
+                id: "3", title: "Snickers Bar", date: Date(), calories: 250,
+                type: .sweet, healthRating: .red),
+            Entry(
+                id: "4", title: "Blueberry Muffin", date: Date(), calories: 265,
+                type: .sweet, healthRating: .red),
+        ]),
+
+        fruits: .constant([
+            Entry(
+                id: "1", title: "Apple", date: Date(), calories: 95, type: .fruit,
+                healthRating: .green),
+            Entry(
+                id: "2", title: "Banana", date: Date(), calories: 105, type: .fruit,
+                healthRating: .green),
+            Entry(
+                id: "3", title: "Orange", date: Date(), calories: 62, type: .fruit,
+                healthRating: .green),
+            Entry(
+                id: "4", title: "Kiwi", date: Date(), calories: 61, type: .fruit,
+                healthRating: .green),
+        ])
+    )
 }

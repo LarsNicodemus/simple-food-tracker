@@ -12,7 +12,7 @@ struct EntryListView: View {
     @State var showAlert = false
     @State var showSheet = false
     @State var showDetailSheet = false
-    @State var selectedEntry: Entry? = nil
+//    @State var selectedEntry: Entry? = nil
     @Binding var mealEntries: [Entry]
     @Binding var drinkEntries: [Entry]
     @Binding var sweetsEntries: [Entry]
@@ -46,23 +46,20 @@ struct EntryListView: View {
                         EntryListSectionView(
                             maxCal: maxCal, sectionTitle: "Meals",
                             showDetailSheet: $showDetailSheet,
-                            entries: $mealEntries, selectedEntry: $selectedEntry
+                            entries: $mealEntries
                         )
                         EntryListSectionView(
                             maxCal: maxCal, sectionTitle: "Drinks",
                             showDetailSheet: $showDetailSheet,
-                            entries: $drinkEntries,
-                            selectedEntry: $selectedEntry)
+                            entries: $drinkEntries)
                         EntryListSectionView(
                             maxCal: maxCal, sectionTitle: "Sweets",
                             showDetailSheet: $showDetailSheet,
-                            entries: $sweetsEntries,
-                            selectedEntry: $selectedEntry)
+                            entries: $sweetsEntries)
                         EntryListSectionView(
                             maxCal: maxCal, sectionTitle: "Fruits",
                             showDetailSheet: $showDetailSheet,
-                            entries: $fruitEntries,
-                            selectedEntry: $selectedEntry)
+                            entries: $fruitEntries)
                     }
 
                 }
@@ -102,8 +99,9 @@ struct EntryListView: View {
                 }
 
             }
+            
         }
-        .navigationTitle(title)
+        
 
         .alert("Einträge Löschen", isPresented: $showAlert) {
             Button("Löschen", role: .destructive) {

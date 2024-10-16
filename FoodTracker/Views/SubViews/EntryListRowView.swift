@@ -10,7 +10,7 @@ import SwiftUI
 struct EntryListRowView: View {
     var maxCal: Int
     @Binding var entry: Entry
-    @Binding var selectedEntry: Entry?
+//    @Binding var selectedEntry: Entry?
     @Binding var showDetailSheet: Bool
 
     var body: some View {
@@ -96,57 +96,57 @@ struct EntryListRowView: View {
                     )
             )
         }
-        .sheet(isPresented: $showDetailSheet) {
-            if let entry = selectedEntry {
-                ZStack {
-                    Color(entry.calories < maxCal
-                          ? Color("minti") : Color("lightred")).opacity(0.1).edgesIgnoringSafeArea(.all)
-                    
-                    VStack(spacing: 20) {
-                        Spacer()
-                        Text(entry.title)
-                            .font(.system(size: 36, weight: .bold, design: .rounded))
-                            .foregroundColor(.primary)
-                        Spacer()
-                        
-                        VStack(spacing: 10) {
-                            Label("\(entry.calories) calories", systemImage: "flame.fill")
-                                .font(.title2)
-                                .foregroundColor(.orange)
-                            
-                            Label(entry.date.formatted(date: .long, time: .shortened), systemImage: "calendar")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            
-                            Label("amount: \(entry.quantity), \(entry.servingSize)", systemImage: "bag.fill")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            
-                            HStack {
-                                Text("Health Rating:")
-                                switch entry.healthRating {
-                                case .green: Text("Good").foregroundColor(Color("mint"))
-                                case .yellow: Text("Moderate").foregroundColor(Color("lightOrange"))
-                                case .red: Text("Unhealthy").foregroundColor(Color("lightred"))
-                                }
-                            }
-                            
-                            Label(entry.mealTime.rawValue.capitalized, systemImage: "clock")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(15)
-                        .shadow(radius: 5)
-                        
-                        Spacer()
-                    }
-                    .padding()
-                }
-                .presentationDetents([.medium, .large])
-            }
-        }
+//        .sheet(isPresented: $showDetailSheet) {
+//            if let entry = selectedEntry {
+//                ZStack {
+//                    Color(entry.calories < maxCal
+//                          ? Color("minti") : Color("lightred")).opacity(0.1).edgesIgnoringSafeArea(.all)
+//                    
+//                    VStack(spacing: 20) {
+//                        Spacer()
+//                        Text(entry.title)
+//                            .font(.system(size: 36, weight: .bold, design: .rounded))
+//                            .foregroundColor(.primary)
+//                        Spacer()
+//                        
+//                        VStack(spacing: 10) {
+//                            Label("\(entry.calories) calories", systemImage: "flame.fill")
+//                                .font(.title2)
+//                                .foregroundColor(.orange)
+//                            
+//                            Label(entry.date.formatted(date: .long, time: .shortened), systemImage: "calendar")
+//                                .font(.subheadline)
+//                                .foregroundColor(.secondary)
+//                            
+//                            Label("amount: \(entry.quantity), \(entry.servingSize)", systemImage: "bag.fill")
+//                                .font(.subheadline)
+//                                .foregroundColor(.secondary)
+//                            
+//                            HStack {
+//                                Text("Health Rating:")
+//                                switch entry.healthRating {
+//                                case .green: Text("Good").foregroundColor(Color("mint"))
+//                                case .yellow: Text("Moderate").foregroundColor(Color("lightOrange"))
+//                                case .red: Text("Unhealthy").foregroundColor(Color("lightred"))
+//                                }
+//                            }
+//                            
+//                            Label(entry.mealTime.rawValue.capitalized, systemImage: "clock")
+//                                .font(.subheadline)
+//                                .foregroundColor(.secondary)
+//                        }
+//                        .padding()
+//                        .background(Color.white.opacity(0.8))
+//                        .cornerRadius(15)
+//                        .shadow(radius: 5)
+//                        
+//                        Spacer()
+//                    }
+//                    .padding()
+//                }
+//                .presentationDetents([.medium, .large])
+//            }
+//        }
     }
 }
 #Preview {
@@ -155,8 +155,5 @@ struct EntryListRowView: View {
         entry: .constant(
             Entry(
                 id: "2", title: "Banana", date: Date(), calories: 105,
-                type: .fruit)),selectedEntry: .constant(
-                    Entry(
-                        id: "2", title: "Banana", date: Date(), calories: 105,
-                        type: .fruit)), showDetailSheet: .constant(false))
+                type: .fruit)), showDetailSheet: .constant(false))
 }

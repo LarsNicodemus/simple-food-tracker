@@ -14,12 +14,12 @@ struct EntryListSectionView: View {
     let sectionTitle: String
     @Binding var showDetailSheet: Bool
     @Binding var entries: [Entry]
-    @Binding var selectedEntry: Entry?
+//    @Binding var selectedEntry: Entry?
     var body: some View {
         
             Section(sectionTitle){
             ForEach($entries) { $entry in
-                EntryListRowView(maxCal: maxCal, entry: $entry, selectedEntry: $selectedEntry, showDetailSheet: $showDetailSheet)
+                EntryListRowView(maxCal: maxCal, entry: $entry, showDetailSheet: $showDetailSheet)
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -44,8 +44,5 @@ struct EntryListSectionView: View {
     EntryListSectionView(maxCal: 2000, sectionTitle: "Meals",showDetailSheet: .constant(false), entries: .constant([Entry(id: "1", title: "Tuna Maki Sushi", date: Date(), calories: 173, type: .meal),
                                                                                   Entry(id: "2", title: "Chicken Caesar Salad", date: Date(), calories: 350, type: .meal),
                                                                                   Entry(id: "3", title: "Vegetable Lasagna", date: Date(), calories: 420, type: .meal),
-                                                                                                                    Entry(id: "4", title: "Grilled Salmon with Asparagus", date: Date(), calories: 380, type: .meal)]), selectedEntry: .constant(
-                                                                                                                        Entry(
-                                                                                                                            id: "2", title: "Banana", date: Date(), calories: 105,
-                                                                                                                            type: .fruit)))
+                                                                                                                    Entry(id: "4", title: "Grilled Salmon with Asparagus", date: Date(), calories: 380, type: .meal)]))
 }

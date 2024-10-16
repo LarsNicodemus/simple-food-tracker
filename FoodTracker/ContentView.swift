@@ -70,7 +70,7 @@ struct ContentView: View {
                 
 
                 Tab("Dashboard", systemImage: "chart.pie.fill", value: 1) {
-                    DashboardView()
+                    DashboardView(meals: $mealEntries, drinks: $drinkEntries, sweets: $sweetsEntries, fruits: $fruitEntries)
                 }
             }
             .tint(Color("minti"))

@@ -52,7 +52,7 @@ struct InfoBox: View {
             HStack {
                 Text("Health Rating:")
                 switch entry.healthRating {
-                case .green: Text("Good").foregroundColor(Color("mint"))
+                case .green: Text("Good").foregroundColor(Color("minti"))
                 case .yellow: Text("Moderate").foregroundColor(Color("lightOrange"))
                 case .red: Text("Unhealthy").foregroundColor(Color("lightred"))
                 }
@@ -91,7 +91,7 @@ struct InfoRow: View {
 func gradientColors(for rating: HealthRating) -> [Color] {
     switch rating {
     case .green:
-        return [Color("minti"),Color("mint"),Color("minti"),Color("minti"),Color("lightOrange"), Color("lightred")]
+        return [Color("minti"),Color("minti"),Color("minti"),Color("minti"),Color("lightOrange"), Color("lightred")]
     case .yellow:
         return [Color("minti"),Color("lightOrange"),Color("lightOrange"),Color("lightOrange"),Color("lightOrange"), Color("lightred")]
     case .red:
