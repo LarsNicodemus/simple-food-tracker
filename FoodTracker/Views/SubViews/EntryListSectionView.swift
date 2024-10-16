@@ -8,31 +8,35 @@
 import SwiftUI
 
 struct EntryListSectionView: View {
+    let title = "Entries"
+
     let maxCal: Int
     let sectionTitle: String
     @Binding var showDetailSheet: Bool
     @Binding var entries: [Entry]
     @Binding var selectedEntry: Entry?
     var body: some View {
-        Section(sectionTitle){
-        ForEach($entries) { $entry in
-            EntryListRowView(maxCal: maxCal, entry: $entry, selectedEntry: $selectedEntry, showDetailSheet: $showDetailSheet)
-            .listRowSeparator(.hidden)
-            .listRowInsets(EdgeInsets())
-            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                Button(role: .destructive) {
-                    if let index = entries.firstIndex(where: { $0.id == entry.id }) {
-                        entries.remove(at: index)
+        
+            Section(sectionTitle){
+            ForEach($entries) { $entry in
+                EntryListRowView(maxCal: maxCal, entry: $entry, selectedEntry: $selectedEntry, showDetailSheet: $showDetailSheet)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        if let index = entries.firstIndex(where: { $0.id == entry.id }) {
+                            entries.remove(at: index)
+                        }
+                        
+                    } label: {
+                        Label("Delete", systemImage: "trash")
                     }
                     
-                } label: {
-                    Label("Delete", systemImage: "trash")
                 }
-                
             }
-        }
+            
+            .padding(.vertical, 4)}
         
-        .padding(.vertical, 4)}
     }
 }
 

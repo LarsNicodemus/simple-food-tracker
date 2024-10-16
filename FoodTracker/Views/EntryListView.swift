@@ -8,37 +8,37 @@
 import SwiftUI
 
 struct EntryListView: View {
-    
+    let title = "Entries"
     @State var showAlert = false
     @State var showSheet = false
     @State var showDetailSheet = false
     @State var selectedEntry: Entry? = nil
     @State var mealEntries: [Entry] = [
-        Entry(id: "1", title: "Tuna Maki Sushi", date: Date(), calories: 173, type: .meal),
-        Entry(id: "2", title: "Chicken Caesar Salad", date: Date(), calories: 350, type: .meal),
-        Entry(id: "3", title: "Vegetable Lasagna", date: Date(), calories: 420, type: .meal),
-        Entry(id: "4", title: "Grilled Salmon with Asparagus", date: Date(), calories: 380, type: .meal)
+        Entry(id: "1", title: "Tuna Maki Sushi", date: Date(), calories: 173, type: .meal, healthRating: .yellow),
+        Entry(id: "2", title: "Chicken Caesar Salad", date: Date(), calories: 350, type: .meal, healthRating: .yellow),
+        Entry(id: "3", title: "Vegetable Lasagna", date: Date(), calories: 420, type: .meal, healthRating: .green),
+        Entry(id: "4", title: "Grilled Salmon with Asparagus", date: Date(), calories: 380, type: .meal, healthRating: .green)
     ]
     
     @State var drinkEntries: [Entry] = [
-        Entry(id: "1", title: "Coffee (black)", date: Date(), calories: 2, type: .drink),
-        Entry(id: "2", title: "Orange Juice", date: Date(), calories: 112, type: .drink),
-        Entry(id: "3", title: "Green Tea", date: Date(), calories: 0, type: .drink),
-        Entry(id: "4", title: "Latte", date: Date(), calories: 190, type: .drink)
+        Entry(id: "1", title: "Coffee (black)", date: Date(), calories: 2, type: .drink, healthRating: .green),
+        Entry(id: "2", title: "Orange Juice", date: Date(), calories: 112, type: .drink, healthRating: .yellow),
+        Entry(id: "3", title: "Green Tea", date: Date(), calories: 0, type: .drink, healthRating: .green),
+        Entry(id: "4", title: "Latte", date: Date(), calories: 190, type: .drink, healthRating: .red)
     ]
     
     @State var sweetsEntries: [Entry] = [
-        Entry(id: "1", title: "Chocolate Chip Cookie", date: Date(), calories: 150, type: .sweet),
-        Entry(id: "2", title: "Strawberry Ice Cream", date: Date(), calories: 207, type: .sweet),
-        Entry(id: "3", title: "Snickers Bar", date: Date(), calories: 250, type: .sweet),
-        Entry(id: "4", title: "Blueberry Muffin", date: Date(), calories: 265, type: .sweet)
+        Entry(id: "1", title: "Chocolate Chip Cookie", date: Date(), calories: 150, type: .sweet, healthRating: .red),
+        Entry(id: "2", title: "Strawberry Ice Cream", date: Date(), calories: 207, type: .sweet, healthRating: .red),
+        Entry(id: "3", title: "Snickers Bar", date: Date(), calories: 250, type: .sweet, healthRating: .red),
+        Entry(id: "4", title: "Blueberry Muffin", date: Date(), calories: 265, type: .sweet, healthRating: .red)
     ]
     
     @State var fruitEntries: [Entry] = [
-        Entry(id: "1", title: "Apple", date: Date(), calories: 95, type: .fruit),
-        Entry(id: "2", title: "Banana", date: Date(), calories: 105, type: .fruit),
-        Entry(id: "3", title: "Orange", date: Date(), calories: 62, type: .fruit),
-        Entry(id: "4", title: "Kiwi", date: Date(), calories: 61, type: .fruit)
+        Entry(id: "1", title: "Apple", date: Date(), calories: 95, type: .fruit, healthRating: .green),
+        Entry(id: "2", title: "Banana", date: Date(), calories: 105, type: .fruit, healthRating: .green),
+        Entry(id: "3", title: "Orange", date: Date(), calories: 62, type: .fruit, healthRating: .green),
+        Entry(id: "4", title: "Kiwi", date: Date(), calories: 61, type: .fruit, healthRating: .green)
     ]
     
     
@@ -51,20 +51,31 @@ struct EntryListView: View {
         
         let maxCal = calcTrack(2000, mealCount + drinkCount + sweetsCount + fruitCount)
         ZStack {
-            List {
-                if mealEntries.isEmpty && drinkEntries.isEmpty && sweetsEntries.isEmpty && fruitEntries.isEmpty {
-                    Section("no Entries availible") {
-                        Text("empty")
+            
+            NavigationStack{
+                        List {
+                            if mealEntries.isEmpty && drinkEntries.isEmpty && sweetsEntries.isEmpty && fruitEntries.isEmpty {
+                                Section("no Entries availible") {
+                                    Text("empty")
+                                }
+                            } else {
+                                EntryListSectionView(maxCal: maxCal, sectionTitle: "Meals", showDetailSheet: $showDetailSheet, entries: $mealEntries, selectedEntry: $selectedEntry)
+                                EntryListSectionView(maxCal: maxCal, sectionTitle: "Drinks", showDetailSheet: $showDetailSheet, entries: $drinkEntries, selectedEntry: $selectedEntry)
+                                EntryListSectionView(maxCal: maxCal, sectionTitle: "Sweets", showDetailSheet: $showDetailSheet, entries: $sweetsEntries, selectedEntry: $selectedEntry)
+                                EntryListSectionView(maxCal: maxCal, sectionTitle: "Fruits", showDetailSheet: $showDetailSheet, entries: $fruitEntries, selectedEntry: $selectedEntry)
+                            }
+                           
+                                
+                                    
                     }
-                } else {
-                    EntryListSectionView(maxCal: maxCal, sectionTitle: "Meals", showDetailSheet: $showDetailSheet, entries: $mealEntries, selectedEntry: $selectedEntry)
-                    EntryListSectionView(maxCal: maxCal, sectionTitle: "Drinks", showDetailSheet: $showDetailSheet, entries: $drinkEntries, selectedEntry: $selectedEntry)
-                    EntryListSectionView(maxCal: maxCal, sectionTitle: "Sweets", showDetailSheet: $showDetailSheet, entries: $sweetsEntries, selectedEntry: $selectedEntry)
-                    EntryListSectionView(maxCal: maxCal, sectionTitle: "Fruits", showDetailSheet: $showDetailSheet, entries: $fruitEntries, selectedEntry: $selectedEntry)
-                }
-               
                     
-                        }
+                        .listStyle(PlainListStyle())
+                        .padding(.horizontal)
+                
+                    }
+            .navigationTitle(title)
+            
+            
             VStack{
                 Spacer()
                 HStack{
@@ -83,12 +94,14 @@ struct EntryListView: View {
                                     .stroke(Color("lightOrange"), lineWidth: 1)
                             )
                     }
-                    .padding(0)
+                    
                     }
+                .padding(.horizontal)
+                .padding(.bottom, 16)
                 }
             
             }
-            .listStyle(PlainListStyle())
+            
             
             
         
@@ -122,5 +135,5 @@ func calcTrack(_ caloriens: Int, _ mealTimes: Int) -> Int {
 
 #Preview {
     EntryListView()
-        .padding()
+        
 }

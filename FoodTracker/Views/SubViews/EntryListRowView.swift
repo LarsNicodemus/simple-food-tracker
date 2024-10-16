@@ -14,17 +14,14 @@ struct EntryListRowView: View {
     @Binding var showDetailSheet: Bool
 
     var body: some View {
-        Button {
-            selectedEntry = entry
-            showDetailSheet = true
-        } label: {
+        NavigationLink(destination: DetailView(entry: entry, maxCal: maxCal)) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(entry.title)
                         .font(.headline)
                         .foregroundColor(
-                            entry.calories < maxCal
-                                ? Color("mint") : Color("lightred")
+                            entry.healthRating == .green ? Color("mint") :
+                                    entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred")
                         )
                         .lineLimit(1)
                         .truncationMode(.tail)
@@ -33,15 +30,15 @@ struct EntryListRowView: View {
                     HStack {
                         Image(systemName: "flame.fill")
                             .foregroundColor(
-                                entry.calories < maxCal
-                                    ? Color("mint") : Color("lightred")
+                                entry.healthRating == .green ? Color("mint") :
+                                        entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred")
                             )
                         Spacer().frame(width: 4)
                         Text("\(entry.calories) Kalorien (amount: \(entry.quantity), \(entry.servingSize))")
                             .font(.subheadline)
                             .foregroundColor(
-                                entry.calories < maxCal
-                                    ? Color("mint") : Color("lightred")
+                                entry.healthRating == .green ? Color("mint") :
+                                        entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred")
                             )
                     }
                     .padding(.top, 2)
@@ -61,41 +58,40 @@ struct EntryListRowView: View {
                         .foregroundColor(.secondary)
                         .lineLimit(1)
                     
-                    switch entry.type {
-                    case .meal: Image(systemName: "fork.knife")
-                            .foregroundColor(.gray)
-                    case .drink: Image(systemName: "cup.and.saucer.fill")
-                            .foregroundColor(.gray)
-                    case .sweet: Image(systemName: "birthday.cake.fill")
-                            .foregroundColor(.gray)
-                    case .fruit: Image(systemName: "applelogo")
-                            .foregroundColor(.gray)
-                    }
+//                    switch entry.type {
+//                    case .meal: Image(systemName: "fork.knife")
+//                            .foregroundColor(.gray)
+//                    case .drink: Image(systemName: "cup.and.saucer.fill")
+//                            .foregroundColor(.gray)
+//                    case .sweet: Image(systemName: "birthday.cake.fill")
+//                            .foregroundColor(.gray)
+//                    case .fruit: Image(systemName: "applelogo")
+//                            .foregroundColor(.gray)
+//                    }
 
                     switch entry.healthRating {
                     case .green:
-                        Image(systemName: "leaf.fill").foregroundColor(.green)
+                        Image(systemName: "leaf.fill").foregroundColor(Color("mint"))
                     case .yellow:
-                        Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.yellow)
+                        Image(systemName: "exclamationmark.triangle.fill").foregroundColor(Color("lightOrange"))
                     case .red:
-                        Image(systemName: "xmark.octagon.fill").foregroundColor(.red)
+                        Image(systemName: "xmark.octagon.fill").foregroundColor(Color("lightred"))
                     }
                 }
             }
             .frame(height: 100)
             .padding(12)
             .background(
-                entry.calories < maxCal
-                    ? Color("mint").opacity(0.1)
-                    : Color("lightred").opacity(0.1)
+                entry.healthRating == .green ? Color("mint").opacity(0.1) :
+                        entry.healthRating == .yellow ? Color("lightOrange").opacity(0.1) : Color("lightred").opacity(0.1)
             )
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(
-                        entry.calories < maxCal
-                            ? Color("mint") : Color("lightred"),
+                        entry.healthRating == .green ? Color("mint") :
+                                entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred"),
                         lineWidth: 1
                     )
             )
@@ -129,9 +125,9 @@ struct EntryListRowView: View {
                             HStack {
                                 Text("Health Rating:")
                                 switch entry.healthRating {
-                                case .green: Text("Good").foregroundColor(.green)
-                                case .yellow: Text("Moderate").foregroundColor(.yellow)
-                                case .red: Text("Unhealthy").foregroundColor(.red)
+                                case .green: Text("Good").foregroundColor(Color("mint"))
+                                case .yellow: Text("Moderate").foregroundColor(Color("lightOrange"))
+                                case .red: Text("Unhealthy").foregroundColor(Color("lightred"))
                                 }
                             }
                             
@@ -162,5 +158,5 @@ struct EntryListRowView: View {
                 type: .fruit)),selectedEntry: .constant(
                     Entry(
                         id: "2", title: "Banana", date: Date(), calories: 105,
-                        type: .fruit)), showDetailSheet: .constant(true))
+                        type: .fruit)), showDetailSheet: .constant(false))
 }

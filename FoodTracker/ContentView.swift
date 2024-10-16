@@ -1,16 +1,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+    
+    @State private var selection = 0
+        var body: some View {
+            
+            TabView(selection: $selection) {
+                Tab("Start", systemImage: "house.fill", value: 0) {
+                    EntryListView()
+                }
+                
+
+                Tab("Dashboard", systemImage: "chart.pie.fill", value: 1) {
+                    DashboardView()
+                }
+            }
+                    
         }
-        .padding()
     }
-}
+
 
 #Preview {
     ContentView()
