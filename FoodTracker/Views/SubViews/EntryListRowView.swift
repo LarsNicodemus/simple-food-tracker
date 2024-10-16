@@ -20,7 +20,7 @@ struct EntryListRowView: View {
                     Text(entry.title)
                         .font(.headline)
                         .foregroundColor(
-                            entry.healthRating == .green ? Color("mint") :
+                            entry.healthRating == .green ? Color("minti") :
                                     entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred")
                         )
                         .lineLimit(1)
@@ -30,14 +30,14 @@ struct EntryListRowView: View {
                     HStack {
                         Image(systemName: "flame.fill")
                             .foregroundColor(
-                                entry.healthRating == .green ? Color("mint") :
+                                entry.healthRating == .green ? Color("minti") :
                                         entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred")
                             )
                         Spacer().frame(width: 4)
                         Text("\(entry.calories) Kalorien (amount: \(entry.quantity), \(entry.servingSize))")
                             .font(.subheadline)
                             .foregroundColor(
-                                entry.healthRating == .green ? Color("mint") :
+                                entry.healthRating == .green ? Color("minti") :
                                         entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred")
                             )
                     }
@@ -71,7 +71,7 @@ struct EntryListRowView: View {
 
                     switch entry.healthRating {
                     case .green:
-                        Image(systemName: "leaf.fill").foregroundColor(Color("mint"))
+                        Image(systemName: "leaf.fill").foregroundColor(Color("minti"))
                     case .yellow:
                         Image(systemName: "exclamationmark.triangle.fill").foregroundColor(Color("lightOrange"))
                     case .red:
@@ -82,7 +82,7 @@ struct EntryListRowView: View {
             .frame(height: 100)
             .padding(12)
             .background(
-                entry.healthRating == .green ? Color("mint").opacity(0.1) :
+                entry.healthRating == .green ? Color("minti").opacity(0.1) :
                         entry.healthRating == .yellow ? Color("lightOrange").opacity(0.1) : Color("lightred").opacity(0.1)
             )
             .cornerRadius(12)
@@ -90,7 +90,7 @@ struct EntryListRowView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(
-                        entry.healthRating == .green ? Color("mint") :
+                        entry.healthRating == .green ? Color("minti") :
                                 entry.healthRating == .yellow ? Color("lightOrange") : Color("lightred"),
                         lineWidth: 1
                     )
@@ -100,7 +100,7 @@ struct EntryListRowView: View {
             if let entry = selectedEntry {
                 ZStack {
                     Color(entry.calories < maxCal
-                          ? Color("mint") : Color("lightred")).opacity(0.1).edgesIgnoringSafeArea(.all)
+                          ? Color("minti") : Color("lightred")).opacity(0.1).edgesIgnoringSafeArea(.all)
                     
                     VStack(spacing: 20) {
                         Spacer()

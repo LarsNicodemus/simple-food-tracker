@@ -13,6 +13,7 @@ struct AddSheetView: View {
     @State var caloriesTextInput: String = ""
     @State var servingSizeInput: String = "1 Portion"
     @State var quantityInput: String = "1"
+    @State private var selectedDate: Date = Date()
     @State private var types: category = .meal
     @State private var healthRating: HealthRating = .green
     @State private var mealTime: MealTime = .lunch
@@ -42,7 +43,7 @@ struct AddSheetView: View {
                     Form {
                         Section("Name") {
                             TextField("Hier eingeben...", text: $titleTextInput)
-                                .foregroundColor(Color("mint"))
+                                .foregroundColor(Color("minti"))
                         }
                         
                         Section("Typ") {
@@ -57,18 +58,18 @@ struct AddSheetView: View {
                         Section("Kalorien") {
                             TextField("Kalorienzahl", text: $caloriesTextInput)
                                 .keyboardType(.numberPad)
-                                .foregroundColor(Color("mint"))
+                                .foregroundColor(Color("minti"))
                         }
                         
                         Section("Portionsgröße") {
                             TextField("Portionsgröße", text: $servingSizeInput)
-                                .foregroundColor(Color("mint"))
+                                .foregroundColor(Color("minti"))
                         }
                         
                         Section("Menge") {
                             TextField("Menge", text: $quantityInput)
                                 .keyboardType(.numberPad)
-                                .foregroundColor(Color("mint"))
+                                .foregroundColor(Color("minti"))
                         }
                         
                         Section("Health Rating") {
@@ -88,6 +89,14 @@ struct AddSheetView: View {
                             }
                             .pickerStyle(SegmentedPickerStyle())
                         }
+                        Section("Datum & Uhrzeit"){
+                            DatePicker(
+                                            "Datum auswählen",
+                                            selection: $selectedDate,
+                                            displayedComponents: [.date, .hourAndMinute]
+                                        )
+//                            Text("Ausgewähltes Datum: \((selectedDate).formatted())")
+                        }
                     }
                     Spacer().frame(height: 16)
                     
@@ -98,6 +107,7 @@ struct AddSheetView: View {
                             let newEntry = Entry(
                                 id: UUID().uuidString,
                                 title: titleTextInput,
+                                date: selectedDate,
                                 calories: calories,
                                 type: types,
                                 servingSize: servingSizeInput,

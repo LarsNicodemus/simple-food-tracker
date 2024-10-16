@@ -27,6 +27,7 @@ enum MealTime: String, CaseIterable, Identifiable {
     case lunch = "Mittagessen"
     case dinner = "Abendessen"
     case snack = "Snack"
+    case drink = "Getränk"
     
     var id: String {rawValue}
 }

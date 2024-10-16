@@ -91,11 +91,11 @@ struct InfoRow: View {
 func gradientColors(for rating: HealthRating) -> [Color] {
     switch rating {
     case .green:
-        return [Color("mint"),Color("mint"),Color("mint"),Color("mint"),Color("lightOrange"), Color("lightred")]
+        return [Color("minti"),Color("mint"),Color("minti"),Color("minti"),Color("lightOrange"), Color("lightred")]
     case .yellow:
-        return [Color("mint"),Color("lightOrange"),Color("lightOrange"),Color("lightOrange"),Color("lightOrange"), Color("lightred")]
+        return [Color("minti"),Color("lightOrange"),Color("lightOrange"),Color("lightOrange"),Color("lightOrange"), Color("lightred")]
     case .red:
-        return [Color("mint"),Color("lightOrange"), Color("lightred"), Color("lightred"), Color("lightred"),Color("lightred")]
+        return [Color("minti"),Color("lightOrange"), Color("lightred"), Color("lightred"), Color("lightred"),Color("lightred")]
     }
 }
 
