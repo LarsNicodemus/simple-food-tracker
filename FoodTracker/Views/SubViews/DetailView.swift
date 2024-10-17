@@ -100,7 +100,5 @@ func gradientColors(for rating: HealthRating) -> [Color] {
 }
 
 #Preview {
-    DetailView(entry: Entry(
-        id: "2", title: "Banana", date: Date(), calories: 105,
-        type: .fruit),maxCal: 2000)
+    DetailView(entry: MOCKUP_entry1,maxCal: 2000)
 }

@@ -31,3 +31,15 @@ enum MealTime: String, CaseIterable, Identifiable {
     
     var id: String {rawValue}
 }
+
+enum DrinkCategory: String, CaseIterable, Identifiable {
+    case water = "Water"
+    case tea = "Tea"
+    case coffee = "Coffee"
+    case juice = "Juice"
+    case soda = "Soda"
+    case beverage = "Beverage"
+    
+    
+    var id: String {rawValue}
+}

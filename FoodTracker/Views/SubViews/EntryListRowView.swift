@@ -12,6 +12,7 @@ struct EntryListRowView: View {
     @Binding var entry: Entry
 //    @Binding var selectedEntry: Entry?
     @Binding var showDetailSheet: Bool
+    
 
     var body: some View {
         NavigationLink(destination: DetailView(entry: entry, maxCal: maxCal)) {
@@ -153,7 +154,5 @@ struct EntryListRowView: View {
     EntryListRowView(
         maxCal: 2000,
         entry: .constant(
-            Entry(
-                id: "2", title: "Banana", date: Date(), calories: 105,
-                type: .fruit)), showDetailSheet: .constant(false))
+            MOCKUP_entry1), showDetailSheet: .constant(false))
 }

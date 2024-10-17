@@ -8,79 +8,156 @@
 import SwiftUI
 
 struct DashboardView: View {
-    
-    @Binding var meals:[Entry]
-    @Binding var drinks:[Entry]
-    @Binding var sweets:[Entry]
-    @Binding var fruits:[Entry]
-    
-    
-    
-    
+    @Binding var meals: [Entry]
+    @Binding var drinks: [Entry]
+    @Binding var sweets: [Entry]
+    @Binding var fruits: [Entry]
+
+    @State private var selectedStartDate = Date()
+    @State private var selectedEndDate = Date()
 
     var body: some View {
-        let mealCalories: Int = addCalories(entries: meals)
-        let drinkCalories: Int = addCalories(entries: drinks)
-        let sweetsCalories: Int = addCalories(entries: sweets)
-        let fruitCalories: Int = addCalories(entries: fruits)
+        // Filtered entries based on selected date range
+        let filteredMeals = filterEntriesByDate(entries: meals)
+        let filteredDrinks = filterEntriesByDate(entries: drinks)
+        let filteredSweets = filterEntriesByDate(entries: sweets)
+        let filteredFruits = filterEntriesByDate(entries: fruits)
 
-        var totalCalories: Int {
+        let mealCalories = addCalories(entries: filteredMeals)
+        let drinkCalories = addCalories(entries: filteredDrinks)
+        let sweetsCalories = addCalories(entries: filteredSweets)
+        let fruitCalories = addCalories(entries: filteredFruits)
+
+        let totalCalories =
             mealCalories + drinkCalories + sweetsCalories + fruitCalories
-        }
-        
+
+        // Calculate the number of days in the selected range
+        let numberOfDays = calculateNumberOfDays(
+            startDate: selectedStartDate, endDate: selectedEndDate)
+
+        // Avoid division by zero, handle when number of days is less than 1
+        let averageCaloriesPerDay = numberOfDays > 0 ? totalCalories / numberOfDays : totalCalories
+
+        ScrollView{
             VStack(spacing: 20) {
                 Text("Dashboard")
                     .font(.largeTitle)
                     .bold()
                     .padding(.top, 40)
 
-                VStack {
-                    Text("Total Calories")
-                        .font(.title2)
-                        .foregroundColor(.secondary)
+                HStack {
 
-                    Text("\(totalCalories) kcal")
-                        .font(
-                            .system(size: 48, weight: .bold, design: .rounded)
+                    VStack {
+                        Text("From")
+                        DatePicker(
+                            "", selection: $selectedStartDate,
+                            displayedComponents: .date
                         )
-                        .foregroundColor(Color("lightOrange"))
+                        .datePickerStyle(CompactDatePickerStyle())
+                    }
+                    .padding()
+                    VStack {
+                        Text("To")
+                        DatePicker(
+                            "", selection: $selectedEndDate,
+                            displayedComponents: .date
+                        )
+                        .datePickerStyle(CompactDatePickerStyle())
+                    }
+                    .padding()
+
                 }
-                .padding()
-                .background(Color("lightOrange").opacity(0.1))
-                .cornerRadius(12)
+                .padding(.horizontal)
+
+                VStack {
+                                Text("Average Calories per Day")
+                                    .font(.title2)
+                                    .foregroundColor(.secondary)
+
+                                Text("\(averageCaloriesPerDay) kcal")
+                                    .font(.system(size: 48, weight: .bold, design: .rounded))
+                                    .foregroundColor(Color("lightOrange"))
+                            }
+                            .padding()
+                            .background(Color("lightOrange").opacity(0.1))
+                            .cornerRadius(12)
+
+                HStack(spacing: 20) {
+
+                    CalorieCategoryView(
+                        category: "Meals",
+                        calories: mealCalories,
+                        color: colorPick(
+                            type: .meal, calories: mealCalories,
+                            dailyCalories: averageCaloriesPerDay, targetCalories: 2000),
+                        dailyCalories: averageCaloriesPerDay
+                    )
+                    CalorieCategoryView(
+                        category: "Drinks",
+                        calories: drinkCalories,
+                        color: colorPick(
+                            type: .drink, calories: drinkCalories,
+                            dailyCalories: averageCaloriesPerDay, targetCalories: 2000),
+                        dailyCalories: averageCaloriesPerDay
+                    )
+                }
 
                 HStack(spacing: 20) {
                     CalorieCategoryView(
-                        category: "Meals", calories: mealCalories, color: colorPick(type: .meal, calories: mealCalories, dailyCalories: totalCalories, targetCalories: 2000),
-                        dailyCalories: totalCalories)
+                        category: "Sweets",
+                        calories: sweetsCalories,
+                        color: colorPick(
+                            type: .sweet, calories: sweetsCalories,
+                            dailyCalories: averageCaloriesPerDay, targetCalories: 2000),
+                        dailyCalories: averageCaloriesPerDay
+                    )
                     CalorieCategoryView(
-                        category: "Drinks", calories: drinkCalories,
-                        color: colorPick(type: .drink, calories: drinkCalories, dailyCalories: totalCalories, targetCalories: 2000), dailyCalories: totalCalories)
-                }
-
-                HStack(spacing: 20) {
-                    CalorieCategoryView(
-                        category: "Sweets", calories: sweetsCalories,
-                        color: colorPick(type: .sweet, calories: sweetsCalories, dailyCalories: totalCalories, targetCalories: 2000), dailyCalories: totalCalories)
-                    CalorieCategoryView(
-                        category: "Fruits", calories: fruitCalories,
-                        color: colorPick(type: .fruit, calories: fruitCalories, dailyCalories: totalCalories, targetCalories: 2000), dailyCalories: totalCalories)
+                        category: "Fruits",
+                        calories: fruitCalories,
+                        color: colorPick(
+                            type: .fruit, calories: fruitCalories,
+                            dailyCalories: averageCaloriesPerDay, targetCalories: 2000),
+                        dailyCalories: averageCaloriesPerDay
+                    )
                 }
 
                 Spacer()
             }
-            .padding()
-            
-        
+        }
+        }
+
+    func filterEntriesByDate(entries: [Entry]) -> [Entry] {
+        let calendar = Calendar.current
+
+        let startOfDay = calendar.startOfDay(for: selectedStartDate)
+
+        let endOfDay = calendar.date(
+            bySettingHour: 23, minute: 59, second: 59, of: selectedEndDate)!
+
+        return entries.filter { entry in
+            entry.date >= startOfDay && entry.date <= endOfDay
+        }
+    }
+
+    // Helper function to calculate the number of days between two dates
+    func calculateNumberOfDays(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+
+        // Calculate the number of days between the start and end dates
+        let dateComponents = calendar.dateComponents(
+            [.day], from: startDate, to: endDate)
+
+        // Add 1 to include the start date in the range
+        return (dateComponents.day ?? 0) + 1
     }
 }
 
-func addCalories(entries: [Entry])-> Int{
+func addCalories(entries: [Entry]) -> Int {
     var calories: Int = 0
     for entry in entries {
-            calories += entry.calories
-        }
-        return calories
+        calories += entry.calories
+    }
+    return calories
 }
 
 func colorPick(
@@ -177,64 +254,12 @@ struct CalorieCategoryView: View {
 
 #Preview {
     DashboardView(
-        meals: .constant([
-            Entry(
-                id: "1", title: "Tuna Maki Sushi", date: Date(), calories: 173,
-                type: .meal, healthRating: .yellow),
-            Entry(
-                id: "2", title: "Chicken Caesar Salad", date: Date(), calories: 350,
-                type: .meal, healthRating: .yellow),
-            Entry(
-                id: "3", title: "Vegetable Lasagna", date: Date(), calories: 420,
-                type: .meal, healthRating: .green),
-            Entry(
-                id: "4", title: "Grilled Salmon with Asparagus", date: Date(),
-                calories: 380, type: .meal, healthRating: .green),
-        ]),
+        meals: .constant(MOCKUP_mealEntries),
 
-        drinks: .constant([
-            Entry(
-                id: "1", title: "Coffee (black)", date: Date(), calories: 2,
-                type: .drink, healthRating: .green),
-            Entry(
-                id: "2", title: "Orange Juice", date: Date(), calories: 112,
-                type: .drink, healthRating: .yellow),
-            Entry(
-                id: "3", title: "Green Tea", date: Date(), calories: 0,
-                type: .drink, healthRating: .green),
-            Entry(
-                id: "4", title: "Latte", date: Date(), calories: 190, type: .drink,
-                healthRating: .red),
-        ]),
+        drinks: .constant(MOCKUP_drinkEntries),
 
-        sweets: .constant([
-            Entry(
-                id: "1", title: "Chocolate Chip Cookie", date: Date(),
-                calories: 150, type: .sweet, healthRating: .red),
-            Entry(
-                id: "2", title: "Strawberry Ice Cream", date: Date(), calories: 207,
-                type: .sweet, healthRating: .red),
-            Entry(
-                id: "3", title: "Snickers Bar", date: Date(), calories: 250,
-                type: .sweet, healthRating: .red),
-            Entry(
-                id: "4", title: "Blueberry Muffin", date: Date(), calories: 265,
-                type: .sweet, healthRating: .red),
-        ]),
+        sweets: .constant(MOCKUP_sweetsEntries),
 
-        fruits: .constant([
-            Entry(
-                id: "1", title: "Apple", date: Date(), calories: 95, type: .fruit,
-                healthRating: .green),
-            Entry(
-                id: "2", title: "Banana", date: Date(), calories: 105, type: .fruit,
-                healthRating: .green),
-            Entry(
-                id: "3", title: "Orange", date: Date(), calories: 62, type: .fruit,
-                healthRating: .green),
-            Entry(
-                id: "4", title: "Kiwi", date: Date(), calories: 61, type: .fruit,
-                healthRating: .green),
-        ])
+        fruits: .constant(MOCKUP_fruitEntries)
     )
 }

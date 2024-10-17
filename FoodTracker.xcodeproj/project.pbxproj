@@ -15,6 +15,10 @@
 		EE2916812CBFB3E60008AD47 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2916802CBFB3E60008AD47 /* HomeView.swift */; };
 		EE2916832CBFB6DC0008AD47 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2916822CBFB6DC0008AD47 /* DetailView.swift */; };
 		EE2916852CBFBC070008AD47 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2916842CBFBC070008AD47 /* DashboardView.swift */; };
+		EE8F472A2CC0F1D100041B3B /* Mockups.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F47292CC0F1CA00041B3B /* Mockups.swift */; };
+		EE8F47DA2CC1110600041B3B /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F47D92CC1110100041B3B /* Drink.swift */; };
+		EE8F47DC2CC1125800041B3B /* DailyDrinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F47DB2CC1124700041B3B /* DailyDrinks.swift */; };
+		EE8F47DE2CC1135C00041B3B /* WaterBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F47DD2CC1135C00041B3B /* WaterBalanceView.swift */; };
 		EE9AFC852CBD140500A7BBF2 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFC842CBD13F700A7BBF2 /* Entry.swift */; };
 		EE9AFC882CBD14A800A7BBF2 /* EntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFC872CBD14A800A7BBF2 /* EntryListView.swift */; };
 		EE9AFCC92CBD27B200A7BBF2 /* EntryListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */; };
@@ -32,6 +36,10 @@
 		EE2916802CBFB3E60008AD47 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EE2916822CBFB6DC0008AD47 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EE2916842CBFBC070008AD47 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		EE8F47292CC0F1CA00041B3B /* Mockups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockups.swift; sourceTree = "<group>"; };
+		EE8F47D92CC1110100041B3B /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
+		EE8F47DB2CC1124700041B3B /* DailyDrinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDrinks.swift; sourceTree = "<group>"; };
+		EE8F47DD2CC1135C00041B3B /* WaterBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterBalanceView.swift; sourceTree = "<group>"; };
 		EE9AFC842CBD13F700A7BBF2 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		EE9AFC872CBD14A800A7BBF2 /* EntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListView.swift; sourceTree = "<group>"; };
 		EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListRowView.swift; sourceTree = "<group>"; };
@@ -83,6 +91,7 @@
 		CE75F20E2C8B1462001AD0A3 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				EE8F47292CC0F1CA00041B3B /* Mockups.swift */,
 				CE75F20F2C8B1462001AD0A3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -91,6 +100,8 @@
 		EE9AFC832CBD13EF00A7BBF2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE8F47DB2CC1124700041B3B /* DailyDrinks.swift */,
+				EE8F47D92CC1110100041B3B /* Drink.swift */,
 				EE9AFC842CBD13F700A7BBF2 /* Entry.swift */,
 			);
 			path = Models;
@@ -114,6 +125,7 @@
 				EE9AFCCC2CBD326100A7BBF2 /* EntryListSectionView.swift */,
 				EE0504602CBE72D7005BB78E /* AddSheetView.swift */,
 				EE2916822CBFB6DC0008AD47 /* DetailView.swift */,
+				EE8F47DD2CC1135C00041B3B /* WaterBalanceView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -198,10 +210,14 @@
 			files = (
 				EE2916812CBFB3E60008AD47 /* HomeView.swift in Sources */,
 				EE9AFC852CBD140500A7BBF2 /* Entry.swift in Sources */,
+				EE8F472A2CC0F1D100041B3B /* Mockups.swift in Sources */,
 				CE75F20B2C8B1460001AD0A3 /* ContentView.swift in Sources */,
 				EE2916832CBFB6DC0008AD47 /* DetailView.swift in Sources */,
 				EE0504612CBE72D7005BB78E /* AddSheetView.swift in Sources */,
+				EE8F47DC2CC1125800041B3B /* DailyDrinks.swift in Sources */,
+				EE8F47DE2CC1135C00041B3B /* WaterBalanceView.swift in Sources */,
 				CE75F2092C8B1460001AD0A3 /* FoodTrackerApp.swift in Sources */,
+				EE8F47DA2CC1110600041B3B /* Drink.swift in Sources */,
 				EE2916852CBFBC070008AD47 /* DashboardView.swift in Sources */,
 				EE9AFC882CBD14A800A7BBF2 /* EntryListView.swift in Sources */,
 				EE9AFCD62CBE4B3600A7BBF2 /* Enums.swift in Sources */,
