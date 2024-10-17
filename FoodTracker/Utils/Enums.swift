@@ -43,3 +43,11 @@ enum DrinkCategory: String, CaseIterable, Identifiable {
     
     var id: String {rawValue}
 }
+
+enum DateChoice: String, CaseIterable, Identifiable {
+    case day = "Daily"
+    case week = "Weekly"
+    case month = "Monthly"
+    
+    var id: String {rawValue}
+}

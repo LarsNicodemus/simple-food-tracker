@@ -139,7 +139,9 @@ struct EntryListView: View {
                             }
                         }
                         .navigationDestination(for: DailyDrinks.self) { dailyDrink in
-                            WaterBalanceView(path: $path, dailyDrinks: dailyDrink)
+//                            WaterBalanceView(path: $path, dailyDrinks: dailyDrink)
+                            WaterBalanceView(dailyDrinks: dailyDrink)
+
                                     }
                     }
 
