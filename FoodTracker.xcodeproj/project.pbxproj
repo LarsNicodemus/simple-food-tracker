@@ -24,6 +24,7 @@
 		EE9AFCC92CBD27B200A7BBF2 /* EntryListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */; };
 		EE9AFCCD2CBD326100A7BBF2 /* EntryListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCCC2CBD326100A7BBF2 /* EntryListSectionView.swift */; };
 		EE9AFCD62CBE4B3600A7BBF2 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AFCD52CBE4B3200A7BBF2 /* Enums.swift */; };
+		EEF822902CC25C99007160A8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8228F2CC25C95007160A8 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		EE9AFCC82CBD27B200A7BBF2 /* EntryListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListRowView.swift; sourceTree = "<group>"; };
 		EE9AFCCC2CBD326100A7BBF2 /* EntryListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListSectionView.swift; sourceTree = "<group>"; };
 		EE9AFCD52CBE4B3200A7BBF2 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		EEF8228F2CC25C95007160A8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		EE9AFCD42CBE4B2100A7BBF2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				EEF8228F2CC25C95007160A8 /* Extensions.swift */,
 				EE9AFCD52CBE4B3200A7BBF2 /* Enums.swift */,
 			);
 			path = Utils;
@@ -219,6 +222,7 @@
 				CE75F2092C8B1460001AD0A3 /* FoodTrackerApp.swift in Sources */,
 				EE8F47DA2CC1110600041B3B /* Drink.swift in Sources */,
 				EE2916852CBFBC070008AD47 /* DashboardView.swift in Sources */,
+				EEF822902CC25C99007160A8 /* Extensions.swift in Sources */,
 				EE9AFC882CBD14A800A7BBF2 /* EntryListView.swift in Sources */,
 				EE9AFCD62CBE4B3600A7BBF2 /* Enums.swift in Sources */,
 				EE9AFCC92CBD27B200A7BBF2 /* EntryListRowView.swift in Sources */,
@@ -358,6 +362,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -387,6 +392,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

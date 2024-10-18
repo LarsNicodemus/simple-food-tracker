@@ -11,4 +11,5 @@ struct Drink: Identifiable, Hashable {
     var id: UUID = UUID()
     var quantity: Int = 1
     var type: DrinkCategory = .water
+    var date: Date = Date()
 }

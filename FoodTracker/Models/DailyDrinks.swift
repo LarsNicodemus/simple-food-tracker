@@ -9,6 +9,6 @@ import Foundation
 struct DailyDrinks: Identifiable, Hashable {
     var id: UUID = UUID()
     var date: Date = Date()
-    var goal: Int = 3000
+    var goal: Int = 2000
     var consumedDrinks: [Drink]
 }

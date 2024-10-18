@@ -9,33 +9,20 @@ import SwiftUI
 
 struct DashboardView: View {
     @Binding var meals: [Entry]
-    @Binding var drinks: [Entry]
     @Binding var sweets: [Entry]
     @Binding var fruits: [Entry]
-
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
 
     var body: some View {
-        // Filtered entries based on selected date range
         let filteredMeals = filterEntriesByDate(entries: meals)
-        let filteredDrinks = filterEntriesByDate(entries: drinks)
         let filteredSweets = filterEntriesByDate(entries: sweets)
         let filteredFruits = filterEntriesByDate(entries: fruits)
-
         let mealCalories = addCalories(entries: filteredMeals)
-        let drinkCalories = addCalories(entries: filteredDrinks)
         let sweetsCalories = addCalories(entries: filteredSweets)
         let fruitCalories = addCalories(entries: filteredFruits)
-
-        let totalCalories =
-            mealCalories + drinkCalories + sweetsCalories + fruitCalories
-
-        // Calculate the number of days in the selected range
-        let numberOfDays = calculateNumberOfDays(
-            startDate: selectedStartDate, endDate: selectedEndDate)
-
-        // Avoid division by zero, handle when number of days is less than 1
+        let totalCalories = mealCalories + sweetsCalories + fruitCalories
+        let numberOfDays = calculateNumberOfDays(startDate: selectedStartDate, endDate: selectedEndDate)
         let averageCaloriesPerDay = numberOfDays > 0 ? totalCalories / numberOfDays : totalCalories
 
         ScrollView{
@@ -89,14 +76,6 @@ struct DashboardView: View {
                         calories: mealCalories,
                         color: colorPick(
                             type: .meal, calories: mealCalories,
-                            dailyCalories: averageCaloriesPerDay, targetCalories: 2000),
-                        dailyCalories: averageCaloriesPerDay
-                    )
-                    CalorieCategoryView(
-                        category: "Drinks",
-                        calories: drinkCalories,
-                        color: colorPick(
-                            type: .drink, calories: drinkCalories,
                             dailyCalories: averageCaloriesPerDay, targetCalories: 2000),
                         dailyCalories: averageCaloriesPerDay
                     )
@@ -177,18 +156,6 @@ func colorPick(
         } else {
             color = Color("minti")
         }
-    case .drink:
-        if (Double(calories) >= (Double(dailyCalories) * 0.1))
-            || (Double(calories) >= (Double(targetCalories) * 0.1))
-        {
-            color = Color("lightred")
-        } else if (Double(calories) >= (Double(dailyCalories) * 0.05))
-            || (Double(calories) >= (Double(targetCalories) * 0.05))
-        {
-            color = Color("lightOrange")
-        } else {
-            color = Color("minti")
-        }
     case .sweet:
         if (Double(calories) >= (Double(dailyCalories) * 0.15))
             || (Double(calories) >= (Double(targetCalories) * 0.15))
@@ -255,8 +222,6 @@ struct CalorieCategoryView: View {
 #Preview {
     DashboardView(
         meals: .constant(MOCKUP_mealEntries),
-
-        drinks: .constant(MOCKUP_drinkEntries),
 
         sweets: .constant(MOCKUP_sweetsEntries),
 

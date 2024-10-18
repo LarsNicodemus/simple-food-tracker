@@ -7,7 +7,6 @@
 
 enum category: String, CaseIterable, Identifiable {
     case meal = "Meal"
-    case drink = "Drink"
     case sweet = "Sweet"
     case fruit = "Fruit"
     
@@ -15,19 +14,18 @@ enum category: String, CaseIterable, Identifiable {
 }
 
 enum HealthRating: String, CaseIterable, Identifiable {
-    case green = "Gesund"
-    case yellow = "Mäßig"
-    case red = "Ungesund"
+    case green = "Healthy"
+    case yellow = "Moderate"
+    case red = "Unhealthy"
     
     var id: String {rawValue}
 }
 
 enum MealTime: String, CaseIterable, Identifiable {
-    case breakfast = "Frühstück"
-    case lunch = "Mittagessen"
-    case dinner = "Abendessen"
+    case breakfast = "Breakfast"
+    case lunch = "Lunch"
+    case dinner = "Dinner"
     case snack = "Snack"
-    case drink = "Getränk"
     
     var id: String {rawValue}
 }
@@ -42,6 +40,23 @@ enum DrinkCategory: String, CaseIterable, Identifiable {
     
     
     var id: String {rawValue}
+    
+    var symbolName: String {
+        switch self {
+        case .water:
+            return "waterbottle.fill"
+        case .tea:
+            return "mug.fill"
+        case .coffee:
+            return "cup.and.saucer.fill"
+        case .juice:
+            return "homepod.fill"
+        case .soda:
+            return "drop.fill"
+        case .beverage:
+            return "wineglass.fill"
+        }
+    }
 }
 
 enum DateChoice: String, CaseIterable, Identifiable {
